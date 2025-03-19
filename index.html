@@ -1,11 +1,76 @@
+
 <!DOCTYPE html>
-<html lang="tr">
+<html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Midnight Club</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #1f1f1f;
+            padding: 15px;
+            text-align: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+        .navbar a:hover {
+            background-color: #ff0000;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        .race-card {
+            background-color: #222;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.5);
+        }
+        .race-card h2 {
+            color: #ff0000;
+        }
+        .race-card p {
+            color: #ccc;
+        }
+    </style>
 </head>
 <body>
-    <h1>Merhaba, GitHub Pages!</h1>
-    <p>İlk web sitemi yayınlıyorum.</p>
+    <div class="navbar">
+        <a href="#home">Ana Sayfa</a>
+        <a href="#team">Ekip Üyeleri</a>
+        <a href="#races">Yarışlar</a>
+        <a href="#winners">Kazananlar</a>
+        <a href="#about">Hakkımızda</a>
+    </div>
+    
+    <div class="container">
+        <h1>🏁 Midnight Club Racing 🏁</h1>
+        <p>Yarış tarihleri ve bilgilendirmeler için takipte kalın.</p>
+        
+        <div class="race-card">
+            <h2>Gelecek Yarış: Şehir Turu</h2>
+            <p>Tarih: 25 Mart 2025</p>
+            <p>Araç Türü : S Class</p>
+        </div>
+        
+        <div class="race-card">
+            <h2>Son Kazanan: Lars Leth</h2>
+            <p>Aracı: Lexus LFA</p>
+            <p>Tarih: 10 Mart 2025</p>
+        </div>
+    </div>
 </body>
 </html>
