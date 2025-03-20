@@ -1,52 +1,178 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Midnight Club</title>
+    <title>Racing Panel</title>
     <style>
+        
         body {
             background-color: #000000;
             color: white;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100%;
+            flex-direction: column;
+            overflow-x: hidden;
         }
+
         .navbar {
             background-color: #1f1f1f;
             padding: 15px;
             text-align: center;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 100;
         }
+
         .navbar a {
             color: white;
             text-decoration: none;
             padding: 10px 20px;
             display: inline-block;
         }
+
         .navbar a:hover {
-            background-color: #ff0000;
+            background-color: #020202cc;
         }
+
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 60px;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Kullanıcılar Paneli */
+        .user-list {
+            width: 24%;
+            padding: 20px;
+            background-color: #222;
+            margin-right: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px #b600c7cc;
+            text-align: center;
+            height: 800px;
+            overflow-y: scroll;
+        }
+
+        .user-card {
+            background-color: #333;
+            padding: 5px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px #b600c7cc;
+            width: 100%; /* Genişliği küçültüyoruz */
+            max-width: 85%; /* Maksimum genişlik */
+            margin: 10px auto; /* Ortalamak için */
+        }
+
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .user-name {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .user-role, .user-car {
+            color: #ccc;
+        }
+
+        .user-name {
+            margin-bottom: 5px;
+        }
+
+        .user-car {
+            margin-top: 5px;
+        }
+
+        /* Sağdaki Image Box (Resim Kutusu) */
+        .right-column {
+            width: 30%;
+            height: 800px; /* Sabit yükseklik */
+            margin-left: 50px;
+            position: absolute;
+            top: 80px;
+            left: 70%; /* Sayfanın sağ tarafına yerleşecek */
+        }
+
+        .image-box {
+            width: 90%;
+            height: 100%;
+            background-image: url('https://i.pinimg.com/736x/2a/47/d5/2a47d59017052d2ce648719d339402f3.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px #b600c7cc;
+        }
+
+        /* Orta Kısım: Küçük Yarış Kartları */
         .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Kartları ortalamak için */
             padding: 20px;
             text-align: center;
+            width: 40%; /* Bu değeri artırarak kartların alanını büyütebilirsiniz */
+            margin: 0 auto; /* Ortada durmasını sağlamak için */
         }
+
         .race-card {
             background-color: #222;
-            padding: 20px;
-            margin: 20px auto;
-            width: 80%;
+            padding: 10px;
+            margin: 35px auto;
+            width: 100%; /* Kartların genişliğini %100 yaptık */
+            max-width: 600px; /* Maksimum genişlik */
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.5);
-        }
+            box-shadow: 0px 0px 10px #b600c7cc;
+            margin-left: -25%;     
+        }   
+
         .race-card h2 {
-            color: #ff0000;
+            color: #701d1d;
         }
+
         .race-card p {
             color: #ccc;
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30%;
+            padding: 1px;
+            color: #ccc;
+            background-color: #111;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #ff4b5c;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
+
     <div class="navbar">
         <a href="index.html">Ana Sayfa</a>
         <a href="team.html">Ekip Üyeleri</a>
@@ -54,22 +180,100 @@
         <a href="winners.html">Kazananlar</a>
         <a href="about.html">Hakkımızda</a>
     </div>
-    
-    <div class="container">
-        <h1>🏁 Midnight Club Racing 🏁</h1>
-        <p>Yarış tarihleri ve bilgilendirmeler için takipte kalın.</p>
-        
-        <div class="race-card">
-            <h2>Gelecek Yarış: Şehir Turu</h2>
-            <p>Tarih: 25 Mart 2025</p>
-            <p>Araç Türü : S Class</p>
+
+    <!-- Navbar'ın hemen altına ekleyelim -->
+<div class="logo-container">
+    <img src="https://i.imgur.com/7Eivnyc.png">
+</div>
+
+
+    <!-- Main container: Left and Right columns -->
+    <div class="main-container">
+        <!-- Sol Kolon (Kullanıcılar) -->
+        <div class="user-list">
+            <h2>Kullanıcılar</h2>
+
+            <!-- Kullanıcı Kartları -->
+            <div class="user-card">
+                <img src="https://i.pinimg.com/736x/c5/45/64/c545640188c79a489162c4ad4d41163f.jpg" alt="Avatar" class="user-avatar">
+                <p class="user-name">Ahmet Yılmaz</p>
+                <p class="user-role">Ekip Üyesi</p>
+                <p class="user-car">Kullanılan Araç: Audi R8</p>
+            </div>
+
+            <div class="user-card">
+                <img src="https://i.pinimg.com/736x/c5/45/64/c545640188c79a489162c4ad4d41163f.jpg" alt="Avatar" class="user-avatar">
+                <p class="user-name">Mehmet Can</p>
+                <p class="user-role">Yarışçı</p>
+                <p class="user-car">Kullanılan Araç: Porsche 911</p>
+            </div>
+
+            <div class="user-card">
+                <img src="https://i.pinimg.com/736x/c5/45/64/c545640188c79a489162c4ad4d41163f.jpg" alt="Avatar" class="user-avatar">
+                <p class="user-name">Emine Arslan</p>
+                <p class="user-role">Gözlemci</p>
+                <p class="user-car">Kullanılan Araç: BMW M3</p>
+            </div>
+            
+            <div class="user-card">
+                <img src="https://i.pinimg.com/736x/c5/45/64/c545640188c79a489162c4ad4d41163f.jpg" alt="Avatar" class="user-avatar">
+                <p class="user-name">ee22e</p>
+                <p class="user-role">Gözlemci</p>
+                <p class="user-car">Kullanılan Araç: 12122</p>
+            </div>
+            
+            <div class="user-card">
+                <img src="https://i.pinimg.com/736x/c5/45/64/c545640188c79a489162c4ad4d41163f.jpg" alt="Avatar" class="user-avatar">
+                <p class="user-name">12</p>
+                <p class="user-role">Gözlemci</p>
+                <p class="user-car">Kullanılan Araç: 2121</p>
+            </div>
+            
+            <div class="user-card">
+                <img src="https://i.pinimg.com/736x/c5/45/64/c545640188c79a489162c4ad4d41163f.jpg" alt="Avatar" class="user-avatar">
+                <p class="user-name">1</p>
+                <p class="user-role">Gözlemci</p>
+                <p class="user-car">Kullanılan Araç: 222</p>
+            </div>
+
+            <!-- Daha fazla kullanıcı kartı ekleyebilirsiniz -->
         </div>
-        
-        <div class="race-card">
-            <h2>Son Kazanan: Lars Leth</h2>
-            <p>Aracı: Lexus LFA</p>
-            <p>Tarih: 10 Mart 2025</p>
+
+        <!-- Orta Kısım: Küçük Yarış Kartları -->
+        <div class="container">
+            <h1></h1>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+
+            <div class="race-card">
+                <h2>Gelecek Yarış: Şehir Turu</h2>
+                <p>Tarih: 25 Mart 2025</p>
+                <p>Araç Türü : S Class</p>
+            </div>
+
+            <div class="race-card">
+                <h2>Son Kazanan: Lars Leth</h2>
+                <p>Aracı: Lexus LFA</p>
+                <p>Tarih: 10 Mart 2025</p>
+            </div>
+        </div>
+
+        <!-- Sağ Kolon (Resim Kutusu) -->
+        <div class="right-column">
+            <div class="image-box"></div> <!-- Resim Kutusu -->
         </div>
     </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p><a href="https://discord.gg/VYUpgk7B" target="_blank">https://discord.gg/VYUpgk7B</a></p>
+        <p>İstek, öneri, şikayet ve iletişim için;</p>
+        <p><a href="https://mail.google.com/mail/?view=cm&fs=1&to=exenonrp@gmail.com">exenonrp@gmail.com</a></p>
+        <p>All Right Reserved ©</p>
+    </div>
+
 </body>
 </html>
