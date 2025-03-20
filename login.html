@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Racing Panel</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: absolute;
+            z-index: 2;
+        }
+
+        .login-form {
+            background-color: #222;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #b600c7cc;
+            text-align: center;
+            width: 300px;
+            margin-bottom: 30px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        input {
+            width: 250px;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .btn-login {
+            background-color: #b600c7;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-login:hover {
+            background-color: #8a0097;
+        }
+
+        .error {
+            color: red;
+            display: none;
+        }
+
+        .welcome-container {
+            display: none;
+            text-align: center;
+            animation: slideIn 2s ease-out;
+        }
+
+        .avatar {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-top: 20px;
+        }
+
+        .welcome-text {
+            margin-top: 10px;
+            font-size: 24px;
+        }
+
+        /* Animasyonlar */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container" id="login-container">
+        <div class="login-form">
+            <h2>Racing Panel</h2>
+            <input type="text" id="username" placeholder="Kullanıcı Adı" required><br>
+            <input type="password" id="password" placeholder="Şifre" required><br>
+            <button class="btn-login" onclick="login()">Giriş Yap</button>
+            <p class="error" id="error-msg">Geçersiz kullanıcı adı veya şifre!</p>
+        </div>
+    </div>
+
+    <div class="welcome-container" id="welcome-container">
+        <div id="user-avatar-container">
+            <img id="user-avatar" class="avatar" src="" alt="User Avatar">
+        </div>
+        <div class="welcome-text">
+            <h1>Hoşgeldin, <span id="welcome-name"></span>!</h1>
+        </div>
+        <button class="btn-login" onclick="window.location.href='index.html'">Racing Panel</button>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const errorMsg = document.getElementById("error-msg");
+            const loginContainer = document.getElementById("login-container");
+            const welcomeContainer = document.getElementById("welcome-container");
+            const welcomeName = document.getElementById("welcome-name");
+            const userAvatar = document.getElementById("user-avatar");
+            
+            const users = [
+                { username: "admin", password: "12345", avatar: "https://i.pinimg.com/736x/c5/45/64/c545640188c79a489162c4ad4d41163f.jpg" },
+                { username: "user", password: "67890", avatar: "https://i.pinimg.com/736x/c5/45/64/c545640188c79a489162c4ad4d41163f.jpg" }
+            ];
+
+            const user = users.find(u => u.username === username && u.password === password);
+
+            if (user) {
+                loginContainer.style.display = "none";
+                welcomeContainer.style.display = "block";
+                welcomeName.innerText = username;
+                userAvatar.src = user.avatar;
+                userAvatar.alt = username + " Avatarı";
+            } else {
+                errorMsg.style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>
